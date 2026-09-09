@@ -1,0 +1,8 @@
+# 运行时依赖
+jieba>=0.42.1
+
+# 开发依赖
+pytest>=8.0
+pytest-cov>=5.0
+ruff>=0.6
+snakeviz>=2.2

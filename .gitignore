@@ -1,0 +1,30 @@
+# Claude Code 临时目录与项目配置（个人项目，不提交给助教）
+/.claude
+/CLAUDE.md
+
+# 图片资源（作业要求等，不入版本控制）
+*.png
+
+# 答案文件输出
+ans.txt
+
+# 性能分析输出
+*.prof
+
+# Python 缓存与构建产物
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+build/
+dist/
+
+# 虚拟环境
+.venv/
+venv/
+env/
