@@ -15,7 +15,7 @@ def read_text(path: str) -> str:
     - 内容为空字符串 → EmptyFileError
     """
     try:
-        with open(path, "r", encoding=_UTF8_ERRORS_TO_TRY[0]) as f:
+        with open(path, encoding=_UTF8_ERRORS_TO_TRY[0]) as f:
             text = f.read()
     except FileNotFoundError as e:
         raise FileReadError(f"文件不存在: {path}") from e
@@ -23,7 +23,7 @@ def read_text(path: str) -> str:
         raise FileReadError(f"无读取权限: {path}") from e
     except UnicodeDecodeError:
         try:
-            with open(path, "r", encoding=_UTF8_ERRORS_TO_TRY[1]) as f:
+            with open(path, encoding=_UTF8_ERRORS_TO_TRY[1]) as f:
                 text = f.read()
         except UnicodeDecodeError as e:
             raise FileReadError(f"编码无法识别（已尝试 UTF-8/GBK）: {path}") from e
