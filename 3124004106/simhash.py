@@ -52,3 +52,25 @@ def hamming_distance(a: int, b: int, bits: int = 64) -> int:
 def simhash_rate(a: int, b: int, bits: int = 64) -> float:
     """由 SimHash 指纹计算归一化重复率：1 - hamming / bits。"""
     return 1.0 - hamming_distance(a, b, bits) / bits
+
+
+def cosine_rate(tokens_a: list[str], tokens_b: list[str]) -> float:
+    """TF 向量余弦相似度，作为 SimHash 之外的对照算法。
+
+    两侧都空或一侧无词时返回 0.0，避免零向量除零。
+    """
+    if not tokens_a or not tokens_b:
+        return 0.0
+
+    ca = Counter(tokens_a)
+    cb = Counter(tokens_b)
+    common = ca.keys() & cb.keys()
+    if not common:
+        return 0.0
+
+    dot = sum(ca[t] * cb[t] for t in common)
+    norm_a = sum(v * v for v in ca.values()) ** 0.5
+    norm_b = sum(v * v for v in cb.values()) ** 0.5
+    if norm_a == 0 or norm_b == 0:
+        return 0.0
+    return dot / (norm_a * norm_b)
